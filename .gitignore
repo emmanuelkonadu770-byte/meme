@@ -1,0 +1,42 @@
+```
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+target/
+
+# TypeScript
+*.tsbuildinfo
+*.js.map
+
+# Logs
+*.log
+
+# Environment variables
+.env
+.env.local
+*.env.*
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Coverage
+coverage/
+htmlcov/
+*.coverage
+
+# Cache
+.cache/
+.mypy_cache/
+.pytest_cache/
+.nyc_output/
+```
