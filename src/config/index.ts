@@ -80,11 +80,11 @@ export type Config = z.infer<typeof ConfigSchema>;
 export function loadConfig(): Config {
   const config = ConfigSchema.parse({
     tradingMode: process.env.TRADING_MODE || 'paper',
-    databaseUrl: process.env.DATABASE_URL,
-    redisUrl: process.env.REDIS_URL,
+    databaseUrl: process.env.DATABASE_URL || 'postgresql://localhost:5432/memecoin_trading',
+    redisUrl: process.env.REDIS_URL || 'redis://localhost:6379',
     rpcEndpoints: {
-      solana: process.env.SOLANA_RPC_URL,
-      solanaDevnet: process.env.SOLANA_DEVNET_RPC_URL,
+      solana: process.env.SOLANA_RPC_URL || 'https://api.mainnet-beta.solana.com',
+      solanaDevnet: process.env.SOLANA_DEVNET_RPC_URL || 'https://api.devnet.solana.com',
       ethereum: process.env.ETHEREUM_RPC_URL,
       base: process.env.BASE_RPC_URL,
       arbitrum: process.env.ARBITRUM_RPC_URL,

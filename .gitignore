@@ -11,32 +11,22 @@ target/
 *.tsbuildinfo
 *.js.map
 
-# Logs
-*.log
-
 # Environment variables
 .env
 .env.local
 *.env.*
 
-# IDE files
+# IDE and editor files
 .vscode/
 .idea/
 *.swp
 *.swo
+*.tmp
 
-# OS files
-.DS_Store
-Thumbs.db
+# Logs
+*.log
 
 # Coverage
 coverage/
-htmlcov/
-*.coverage
-
-# Cache
-.cache/
-.mypy_cache/
-.pytest_cache/
 .nyc_output/
 ```
