@@ -7,7 +7,6 @@ import { ExecutionEngine } from './modules/execution/engine.js';
 import { TokenScanner } from './modules/discovery/scanner.js';
 import { SolanaAdapter, createSolanaAdapter } from './adapters/solana.js';
 import { adapterRegistry } from './adapters/interface.js';
-import { startServer } from './server.js';
 
 /**
  * Main application entry point
@@ -251,12 +250,6 @@ class TradingPlatform {
     this.running = true;
     console.log('▶️  Platform started');
     
-    // Start web server
-    await startServer();
-    
-    // Sync bot status with server periodically
-    this.syncBotStatus();
-    
     // Start token scanner
     await this.tokenScanner.start();
     
@@ -267,38 +260,6 @@ class TradingPlatform {
         healthy: true,
       });
     }, 60000); // Every minute
-  }
-  
-  /**
-   * Sync bot status with web server periodically
-   */
-  private syncBotStatus(): void {
-    import('http').then((http) => {
-      setInterval(() => {
-        const status = this.getStatus();
-        const data = JSON.stringify({
-          active: status.running && !status.killSwitchActive && !status.circuitBreakerActive,
-          mode: status.mode,
-          tradesExecuted: 0, // Would track actual trades
-        });
-        
-        const req = http.default.request(
-          `http://localhost:${process.env.PORT || 3000}/api/status`,
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Content-Length': data.length,
-            },
-          },
-          () => {}
-        );
-        
-        req.on('error', () => {}); // Ignore errors
-        req.write(data);
-        req.end();
-      }, 3000); // Every 3 seconds
-    });
   }
   
   /**
